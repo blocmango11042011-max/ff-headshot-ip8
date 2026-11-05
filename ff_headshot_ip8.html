@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>FF Headshot Panel</title>
+<style>
+:root {
+  --site-primary: #D92D36;
+  --site-on-primary: #FFFFFF;
+  --site-secondary: #252832;
+  --site-on-secondary: #FFFFFF;
+  --site-background: #101116;
+  --site-on-background: #F5F5F7;
+  --site-font-body: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-font-heading: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+  color-scheme: light dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--site-font-body); background: light-dark(#f1f1f4, var(--site-background)); color: light-dark(#17181d, var(--site-on-background)); }
+#app { min-height: 100svh; width: 100%; border-radius: 0; background-color: var(--site-background); color: var(--site-on-background); padding: calc(22px * var(--site-spacing-scale)) 18px calc(34px * var(--site-spacing-scale)); overflow: hidden; position: relative; }
+.glow { position:absolute; width:230px; height:230px; border-radius:50%; background:var(--site-primary); filter:blur(100px); opacity:calc(.18 * var(--site-decoration-opacity)); top:-100px; right:-100px; pointer-events:none; }
+main { max-width:540px; margin:0 auto; position:relative; }
+header { display:flex; align-items:center; justify-content:space-between; margin-bottom:26px; }
+.brand { display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:1.4px; }
+.logo { width:38px; height:38px; border-radius:13px; display:grid; place-items:center; background:var(--site-primary); color:white; font-size:20px; box-shadow:0 8px 24px #d92d3640; }
+.tag { font-size:10px; color:#ff777e; border:1px solid #74333a; padding:6px 9px; border-radius:999px; letter-spacing:1px; }
+.hero { margin-bottom:22px; }
+.eyebrow { color:#ff777e; font-size:11px; font-weight:800; letter-spacing:2px; }
+h1 { font-family:var(--site-font-heading); font-size:calc(32px * var(--site-heading-scale)); line-height:1.05; margin:9px 0; letter-spacing:-1.5px; }
+.sub { color:#a6a7b1; font-size:13px; line-height:1.5; max-width:360px; }
+.panel { background:light-dark(#fff, #1b1d25); border:1px solid light-dark(#e4e4e9,#30323d); border-radius:calc(20px * var(--site-radius-scale)); padding:19px; margin:14px 0; box-shadow:0 12px 35px #00000018; }
+.panel-title { display:flex; justify-content:space-between; align-items:center; font-weight:800; font-size:14px; margin-bottom:16px; }
+.value { color:#ff646d; font-size:22px; font-weight:900; font-variant-numeric:tabular-nums; }
+.range-wrap { margin:17px 0 7px; }
+input[type=range] { width:100%; accent-color:var(--site-primary); cursor:pointer; }
+.scale { display:flex; justify-content:space-between; color:#92939e; font-size:10px; margin-top:4px; }
+.preset-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+button { font:inherit; cursor:pointer; border:0; }
+.preset { background:var(--site-secondary); color:var(--site-on-secondary); padding:11px 7px; border-radius:12px; font-size:11px; font-weight:750; border:1px solid #3a3d49; }
+.preset:active, .preset.active { background:var(--site-primary); border-color:var(--site-primary); color:white; }
+.actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:16px; }
+.action { padding:14px; border-radius:13px; font-weight:850; font-size:12px; }
+.primary { background:var(--site-primary); color:white; }
+.secondary { background:var(--site-secondary); color:white; border:1px solid #3a3d49; }
+.status { display:flex; align-items:center; gap:8px; color:#a6a7b1; font-size:11px; margin-top:13px; }
+.dot { width:7px; height:7px; background:#48c78e; border-radius:50%; box-shadow:0 0 10px #48c78e; }
+.note { font-size:10px; line-height:1.55; color:#90919c; text-align:center; margin:18px 8px 0; }
+.toast { min-height:18px; text-align:center; color:#ff858b; font-size:11px; margin-top:10px; }
+@media (min-width:600px) { #app { padding-top:34px; } }
+</style>
+</head>
+<body>
+<div id="app"><div class="glow"></div><main>
+<header><div class="brand"><div class="logo">✦</div><span>HEADSHOT PANEL</span></div><span class="tag">IP8 EDITION</span></header>
+<section class="hero"><div class="eyebrow">TRAINING CONFIGURATION</div><h1>FIND YOUR<br>OWN SENSITIVITY.</h1><div class="sub">Bảng thiết lập và mô phỏng cá nhân dành cho iPhone 8.</div></section>
+<section class="panel">
+  <div class="panel-title"><span>Độ nhạy tổng</span><span class="value" id="sensValue">165</span></div>
+  <div class="range-wrap"><input id="sensitivity" type="range" min="0" max="200" value="165"><div class="scale"><span>0</span><span>100</span><span>200</span></div></div>
+  <div class="panel-title" style="margin-top:23px"><span>Kích thước nút bắn</span><span class="value" id="fireValue">110</span></div>
+  <div class="range-wrap"><input id="fire" type="range" min="0" max="200" value="110"><div class="scale"><span>0</span><span>100</span><span>200</span></div></div>
+</section>
+<section class="panel">
+  <div class="panel-title"><span>Preset tham khảo</span><span style="font-size:10px;color:#92939e">CHỌN ĐỂ THỬ</span></div>
+  <div class="preset-grid"><button class="preset" data-s="145" data-f="100">ỔN ĐỊNH</button><button class="preset active" data-s="165" data-f="110">CÂN BẰNG</button><button class="preset" data-s="185" data-f="125">NHANH</button></div>
+  <div class="actions"><button class="action primary" id="save">LƯU CẤU HÌNH</button><button class="action secondary" id="reset">ĐẶT LẠI</button></div>
+  <div class="status"><span class="dot"></span><span id="statusText">Sẵn sàng tùy chỉnh</span></div><div class="toast" id="toast" aria-live="polite"></div>
+</section>
+<p class="note">Công cụ tham khảo và mô phỏng. Không can thiệp Free Fire, không tự động kéo tâm và không bảo đảm tăng headshot. Hãy thử mức phù hợp với thao tác của bạn.</p>
+</main></div>
+<script>
+const sensitivity = document.getElementById('sensitivity');
+const fire = document.getElementById('fire');
+const sensValue = document.getElementById('sensValue');
+const fireValue = document.getElementById('fireValue');
+const toast = document.getElementById('toast');
+const statusText = document.getElementById('statusText');
+function update() { sensValue.textContent = sensitivity.value; fireValue.textContent = fire.value; document.querySelectorAll('.preset').forEach(b => b.classList.toggle('active', b.dataset.s === sensitivity.value && b.dataset.f === fire.value)); statusText.textContent = 'Đang dùng độ nhạy ' + sensitivity.value + ' · nút bắn ' + fire.value; }
+sensitivity.addEventListener('input', update); fire.addEventListener('input', update);
+document.querySelectorAll('.preset').forEach(button => button.addEventListener('click', () => { sensitivity.value = button.dataset.s; fire.value = button.dataset.f; update(); toast.textContent = 'Đã áp dụng preset tham khảo.'; }));
+document.getElementById('save').addEventListener('click', () => { const data = { sensitivity: Number(sensitivity.value), fire: Number(fire.value) }; try { localStorage.setItem('ff-ip8-config', JSON.stringify(data)); toast.textContent = 'Đã lưu cấu hình trên trình duyệt này.'; } catch(e) { toast.textContent = 'Trình duyệt không cho phép lưu cấu hình.'; } });
+document.getElementById('reset').addEventListener('click', () => { sensitivity.value = 165; fire.value = 110; update(); toast.textContent = 'Đã đặt lại mức mặc định.'; });
+try { const saved = JSON.parse(localStorage.getItem('ff-ip8-config')); if (saved && Number.isFinite(saved.sensitivity) && Number.isFinite(saved.fire)) { sensitivity.value = Math.max(0,Math.min(200,saved.sensitivity)); fire.value = Math.max(0,Math.min(200,saved.fire)); } } catch(e) {}
+update();
+</script>
+</body></html>
